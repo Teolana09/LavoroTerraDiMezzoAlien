@@ -557,18 +557,23 @@
                     equipaggiamentoattuale = Equipaggiamento(0,ref medikit,ref proiettili); 
                     Console.WriteLine(equipaggiamentoattuale);
 
+                   
                     string stanzaAttuale = SCpercorso(ref scappato);
                     Console.WriteLine("Ti trovi in: " + stanzaAttuale);
 
-                
+                    
                     Console.WriteLine("descrizione della stanza:");
                     string descrizioneStanza = OttieniDescrizioneStanza(stanzaAttuale);
                     Console.WriteLine(descrizioneStanza);
                     int lanciodado;
                     lanciodado = lancioDado();
                     Console.WriteLine("hai fatto un lancio di dado e hai ottenuto: " + lanciodado);
+                    int avanza = boost(0, lanciodado, scassaP);
 
-                    Console.WriteLine("--------------------------------");
+                    Console.WriteLine("Avanzi di " + avanza + " passi totali");
+                    string imprevisto = Imprevisti("");
+
+                Console.WriteLine("--------------------------------");
                     int vitaGiocatore = 100;
 
                     Console.WriteLine("Vita iniziale:" + vitaGiocatore);
