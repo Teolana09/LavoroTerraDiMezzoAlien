@@ -7,7 +7,7 @@
             Console.WriteLine("Sei nella sala di comando.\n");
             Console.WriteLine("La situazione è instabile. Dobbiamo decidere ora.\n");
 
-            string fine = "Nessuna decisione presa"; // ✅ FIX
+            string fine = "Nessuna decisione presa"; 
             int opzione = 1;
 
             if (personaggioScelto != 4)
@@ -99,7 +99,7 @@
                 //gestione dell'attacco del giocatore
 
                 Random rnd = new Random();
-                int danno = rnd.Next(5, 16); // 5–15 danni
+                int danno = rnd.Next(5, 16); 
 
                 vitaAlieno -= danno;
 
@@ -282,7 +282,7 @@
             {
                 //gestione dell'attacco alieno
                 Random rnd = new Random();
-                int danno = rnd.Next(1, 11); // da 1 a 10
+                int danno = rnd.Next(1, 11); 
 
                 vita -= danno;
 
