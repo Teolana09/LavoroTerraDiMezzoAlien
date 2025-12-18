@@ -357,12 +357,10 @@
                 // elenco delle stanze
                 string[] stanze =
                 {
-                 "Ponte di Comando Holo-Visivo",
-                 "Camera di Navigazione Quantistica",
-                 "Sala Motori a Fusione Oscura",
-                 "Laboratorio Xenobiologico",
-                 "Modulo di Criostasi Profonda",
-                 "Hangar Multifase"
+                 "Ponte di Comando Olografico","Sala di Calcolo Quantistico", "Centro Comunicazioni Sottospaziali", "Serra Idroponica", "Laboratorio di Sintesi Molecolare", "Moduli Abitativi", "Area Sociale Common Room",
+                 "Baia di Ingegneria del Reattore", "Laboratorio di Astrobiologia", "Officina di Fabbricazione 4D", "Hangar dei Droni", "Sala di Criosonno",
+                 "Centro Medico di Rigenerazione", "Camera di Sanificazione", "Palestra a Resistenza Magnetica", "Sala Olografica (Holodeck)", "Osservatorio Crystal Dome", "Sala di Meditazione Sensoriale",
+                 "Archivio della Memoria", "Baia delle Capsule di Salvataggio"
                 };
 
             
