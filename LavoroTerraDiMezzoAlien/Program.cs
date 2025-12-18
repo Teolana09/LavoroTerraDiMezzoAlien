@@ -164,134 +164,150 @@
                 }
                 return imprevisti;
             }
-            static string turnoDIG(string turnoDIG, bool cacciatore, bool curatore, bool scassaP, bool armaletale, bool porteAPP, ref int proiettoli,  ref int medikit)
+        static string turnoDIG(string turnoDIG, bool cacciatore, bool curatore, bool scassaP, bool armaletale, bool porteAPP, ref int proiettoli, ref int medikit)
+        {
+            //gestione del turno di gioco
+            //scelte del giocatore
+            bool trovatoOggetto = false, sceltaConSuccesso = false;
+            Random random = new Random();
+            int OggaC = random.Next(1, 50);
+            Console.WriteLine("è il tuo turno di giocare, scegli cosa fare:");
+            Console.WriteLine("---------------------------");
+
+
+            Console.WriteLine("1) preparare una trappola");
+
+            Console.WriteLine("2) provare a sbloccare le porte");
+
+            Console.WriteLine("3) controllare per oggetti utili");            
+
+            Console.WriteLine("-----------------------------------");
+            int sceltaTurno = Convert.ToInt32(Console.ReadLine());
+            while (sceltaTurno < 1 || sceltaTurno > 4)
             {
-                //gestione del turno di gioco
-                //scelte del giocatore
-                bool trovatoOggetto = false, sceltaConSuccesso = false;
-                Random random = new Random();
-                int OggaC = random.Next(1, 50);
-                Console.WriteLine("è il tuo turno di giocare, scegli cosa fare:");
-                Console.WriteLine("---------------------------");
-
-
-                Console.WriteLine("1) preparare una trappola");               
-
-                Console.WriteLine("2) provare a sbloccare le porte");
-
-                Console.WriteLine("3) controllare per oggetti utili");
-
-                Console.WriteLine("-----------------------------------");
-                int sceltaTurno = Convert.ToInt32(Console.ReadLine());
-                while (sceltaTurno < 1 || sceltaTurno > 4)
+                Console.WriteLine("scelta non valida, riprova");
+                sceltaTurno = Convert.ToInt32(Console.ReadLine());
+            }
+            while (sceltaConSuccesso == false)
+            {
+                if (sceltaTurno == 1)
                 {
-                    Console.WriteLine("scelta non valida, riprova");
-                    sceltaTurno = Convert.ToInt32(Console.ReadLine());
-                }
-                while (sceltaConSuccesso == false)
-                {
-                    if (sceltaTurno == 1)
+                    if (cacciatore == true)
                     {
-                        if (cacciatore == true)
+                        Console.WriteLine("hai preparato una trappola per l'alieno");
+                        sceltaConSuccesso = true;
+                        Random random1 = new Random();
+                        int cattura = random1.Next(1, 10);
+                        if (cattura > 5)
                         {
-                            Console.WriteLine("hai preparato una trappola per l'alieno");
+                            Console.WriteLine("hai catturato lo xenomorfo con successo!");
+                            Console.WriteLine("complimenti sei riuscito a diminuire la sua velocità");
                             sceltaConSuccesso = true;
-                            Random random1 = new Random();
-                            int cattura = random1.Next(1, 10);
-                            if (cattura > 5)
+                            Random random2 = new Random();
+                            int rallenta = random2.Next(1, 5);
+                            if (rallenta > 2)
                             {
-                                Console.WriteLine("hai catturato lo xenomorfo con successo!");
-                                Console.WriteLine("complimenti sei riuscito a diminuire la sua velocità");
-                                sceltaConSuccesso = true;
+                                Console.WriteLine("lo xenomorfo è stato rallentato di 2 passi");
                             }
                             else
                             {
-                                Console.WriteLine("lo xenomorfo è riuscito a sfuggire alla trappola");
-
+                                Console.WriteLine("lo xenomorfo è stato rallentato di 1 passo");
                             }
                         }
                         else
                         {
-                            Console.WriteLine("non sei in grado di preparare una trappola");
-                            Console.WriteLine("scelta non valida, riprova");
-                            sceltaTurno = Convert.ToInt32(Console.ReadLine());
-                        }
+                            Console.WriteLine("lo xenomorfo è riuscito a sfuggire alla trappola");
 
+                        }
                     }
-                
-                    else if (sceltaTurno == 2)
+                    else
                     {
-                        Random random1 = new Random();
-                        int segnale = random1.Next(1, 10);
-                        if (segnale > 7)
-                        {
-                            Console.WriteLine("hai sbloccato tutte le porte con successo");
-                            sceltaConSuccesso = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("non sei riuscito a sbloccare le porte");
-                            Console.WriteLine("scelta non valida, riprova");
-                            sceltaTurno = Convert.ToInt32(Console.ReadLine());
-                        }
-
+                        Console.WriteLine("non sei in grado di preparare una trappola");
+                        Console.WriteLine("scelta non valida, riprova");
+                        sceltaTurno = Convert.ToInt32(Console.ReadLine());
                     }
-                    else if (sceltaTurno == 3)
+
+                }
+
+                else if (sceltaTurno == 2)
                 {
-                        Console.WriteLine("hai scelto di cercare oggetti utili");
+                    Random random1 = new Random();
+                    int segnale = random1.Next(1, 10);
+                    if (segnale > 7)
+                    {
+                        Console.WriteLine("hai sbloccato tutte le porte con successo");
                         sceltaConSuccesso = true;
-                        if (OggaC > 25)
-                        {
-                            Equipaggiamento(0, ref medikit, ref proiettoli);
-                            Console.WriteLine("trovare un oggetto utile");
+                    }
+                    else
+                    {
+                        Console.WriteLine("non sei riuscito a sbloccare le porte");
+                        Console.WriteLine("scelta non valida, riprova");
+                        sceltaTurno = Convert.ToInt32(Console.ReadLine());
+                    }
 
-                            Random oggetto = new Random();
-                            int oggettoTrovato = oggetto.Next(1, 4);
-                            if (oggettoTrovato == 1)
-                            {
-                                Console.WriteLine("hai trovato un medikit");
-                                curatore = true;
-                            }
-                            else if (oggettoTrovato == 2)
-                            {
-                                Console.WriteLine("hai trovato dei proiettili");
-                                proiettoli += 10;
-                                armaletale = true;
-                            }
-                            else if (oggettoTrovato == 3)
-                            {
-                                Console.WriteLine("hai trovato una chiave magnetica");
-                                scassaP = true;
-                            }
-                        }
+                }
+                else if (sceltaTurno == 3)
+                {
+                    Console.WriteLine("hai scelto di cercare oggetti utili");
+                    sceltaConSuccesso = true;
+                    if (OggaC > 25)
+                    {
+                        Equipaggiamento(0, ref medikit, ref proiettoli);
+                        Console.WriteLine("trovare un oggetto utile");
 
-                        else
+                        Random oggetto = new Random();
+                        int oggettoTrovato = oggetto.Next(1, 4);
+                        if (oggettoTrovato == 1)
                         {
-                            Console.WriteLine("non trovare nulla di utile");
+                            Console.WriteLine("hai trovato un medikit");
+                            curatore = true;
                         }
+                        else if (oggettoTrovato == 2)
+                        {
+                            Console.WriteLine("hai trovato dei proiettili");
+                            proiettoli += 10;
+                            armaletale = true;
+                        }
+                        else if (oggettoTrovato == 3)
+                        {
+                            Console.WriteLine("hai trovato una chiave magnetica");
+                            scassaP = true;
+                        }
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("non trovare nulla di utile");
                     }
                 }
+
+            } 
 
 
 
                 return turnoDIG;
-            }
+        }
 
 
-            static void AttaccoAlieno(ref int vita)
+            static void AttaccoAlieno(ref int vita, bool armaletale)
             {
                 //gestione dell'attacco alieno
                 Random rnd = new Random();
                 int danno = rnd.Next(1, 11); 
-
+                Random difesa = new Random();
+                int parata = difesa.Next(1, 7);
                 vita -= danno;
 
                 if (vita < 0)
                 {
                     vita = 0;
                 }
+                if (armaletale == true )
+                {
+                vita += parata;
+                }
 
-                Console.WriteLine("       __.,,------.._\r\n      ,'\"   _      _   \"`.\r\n     /.__, ._  -=- _\"`    Y\r\n    (.____.-.`      \"\"`   j\r\n     VvvvvvV`.Y,.    _.,-'       ,     ,     ,\r\n        Y    ||,   '\"\\         ,/    ,/    ./\r\n        |   ,'  ,     `-..,'_,'/___,'/   ,'/   ,\r\n   ..  ,;,,',-'\"\\,'  ,  .     '     ' \"\"' '--,/    .. ..\r\n ,'. `.`---'     `, /  , Y -=-    ,'   ,   ,. .`-..||_|| ..\r\nff\\\\`. `._        /f ,'j j , ,' ,   , f ,  \\=\\ Y   || ||`||_..\r\nl` \\` `.`.\"`-..,-' j  /./ /, , / , / /l \\   \\=\\l   || `' || ||...\r\n `  `   `-._ `-.,-/ ,' /`\"/-/-/-/-\"'''\"`.`.  `'.\\--`'--..`'_`' || ,\r\n            \"`-_,',  ,'  f    ,   /      `._    ``._     ,  `-.`'//         ,\r\n          ,-\"'' _.,-'    l_,-'_,,'          \"`-._ . \"`. /|     `.'\\ ,       |\r\n        ,',.,-'\"          \\=) ,`-.         ,    `-'._`.V |       \\ // .. . /j\r\n        |f\\\\               `._ )-.\"`.     /|         `.| |        `.`-||-\\\\/\r\n        l` \\`                 \"`._   \"`--' j          j' j          `-`---'\r\n         `  `                     \"`,-  ,'/       ,-'\"  /\r\n                                 ,'\",__,-'       /,, ,-'\r\n                                 Vvv'            VVv'");
+            Console.WriteLine("       __.,,------.._\r\n      ,'\"   _      _   \"`.\r\n     /.__, ._  -=- _\"`    Y\r\n    (.____.-.`      \"\"`   j\r\n     VvvvvvV`.Y,.    _.,-'       ,     ,     ,\r\n        Y    ||,   '\"\\         ,/    ,/    ./\r\n        |   ,'  ,     `-..,'_,'/___,'/   ,'/   ,\r\n   ..  ,;,,',-'\"\\,'  ,  .     '     ' \"\"' '--,/    .. ..\r\n ,'. `.`---'     `, /  , Y -=-    ,'   ,   ,. .`-..||_|| ..\r\nff\\\\`. `._        /f ,'j j , ,' ,   , f ,  \\=\\ Y   || ||`||_..\r\nl` \\` `.`.\"`-..,-' j  /./ /, , / , / /l \\   \\=\\l   || `' || ||...\r\n `  `   `-._ `-.,-/ ,' /`\"/-/-/-/-\"'''\"`.`.  `'.\\--`'--..`'_`' || ,\r\n            \"`-_,',  ,'  f    ,   /      `._    ``._     ,  `-.`'//         ,\r\n          ,-\"'' _.,-'    l_,-'_,,'          \"`-._ . \"`. /|     `.'\\ ,       |\r\n        ,',.,-'\"          \\=) ,`-.         ,    `-'._`.V |       \\ // .. . /j\r\n        |f\\\\               `._ )-.\"`.     /|         `.| |        `.`-||-\\\\/\r\n        l` \\`                 \"`._   \"`--' j          j' j          `-`---'\r\n         `  `                     \"`,-  ,'/       ,-'\"  /\r\n                                 ,'\",__,-'       /,, ,-'\r\n                                 Vvv'            VVv'");
 
                 Console.WriteLine("L'alieno ti ha attaccato! Perdi" + danno + " punti vita.");
                 Console.WriteLine("Vita attuale:" + vita);
